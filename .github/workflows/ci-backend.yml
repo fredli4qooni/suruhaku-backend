@@ -1,0 +1,24 @@
+name: SuruhAKU Backend CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest 
+
+    steps:
+    - name: Checkout Kode dari GitHub
+      uses: actions/checkout@v3
+
+    - name: Siapkan Environment Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+
+    - name: Install Semua Dependency
+      run: npm install
+
+    - name: Jalankan Pengujian Otomatis
+      run: npm test

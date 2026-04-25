@@ -54,6 +54,17 @@ app.get('/', (req, res) => {
   });
 });
 
+app.use((err, req, res, next) => {
+  console.error("🔴 TERJADI ERROR DI BACKEND:", err);
+  
+  const statusCode = err.statusCode || 500;
+  res.status(statusCode).json({
+    success: false,
+    message: err.message || 'Terjadi kesalahan internal pada server',
+    error: err.stack || err
+  });
+});
+
 app.listen(port, '0.0.0.0', () => {
   console.log(`[SERVER] SuruhAKU API run http://0.0.0.0:${port}`);
 });
